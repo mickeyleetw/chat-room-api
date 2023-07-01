@@ -1,0 +1,10 @@
+version: "3"
+services:
+  postgresql:
+    image: "postgres:13.10-alpine"
+    environment:
+      - POSTGRES_PASSWORD=elk
+      - POSTGRES_USER=elk
+      - POSTGRES_DB=elk
+    ports:
+      - 5432:5432
