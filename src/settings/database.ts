@@ -70,39 +70,29 @@ export class SequelizeConnection {
 
 }
 
-
 // Create Base column in all tables 
 export class Base extends Model { }
-Base.init(
+Base.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false
+  }
+},
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false
-    }
-  }, {
-  sequelize: SequelizeConnection.getInstance(),
-  schema: DB_SCHEMA,
-  modelName: 'Base',
-  freezeTableName: true,
-  indexes: [
-    {
-      fields: ['createTime'],
-      name: 'create_time_index',
-    },
-    {
-      fields: ['updateTime'],
-      name: 'update_time_index',
-    },
-  ],
-}
+    sequelize: SequelizeConnection.getInstance(),
+    schema: DB_SCHEMA,
+    modelName: 'Base',
+    freezeTableName: true
+  }
 )
+
 
 // Create AsyncTransaction class for transaction management
 export class AsyncTransaction {
   private transaction: Transaction | null = null;
-  private sequelize: Sequelize= SequelizeConnection.getInstance();
+  private sequelize: Sequelize = SequelizeConnection.getInstance();
 
   async start(): Promise<void> {
     this.transaction = await this.sequelize.transaction(

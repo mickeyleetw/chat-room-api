@@ -4,7 +4,7 @@
   "description": "elkroom assignment",
   "main": "dist/app.js",
   "scripts": {
-    "resetDB": "tsc && node dist/cli.js --resetDB",
+    "resetDB": "tsc && node dist/cli.js && exit",
     "start": "tsc && node dist/app.js",
     "lint": "eslint . --ext .ts",
     "test": "echo \"Error: no test specified\" && exit 1"

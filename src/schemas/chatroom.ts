@@ -1,15 +1,18 @@
 
-import { Base } from "../settings/database";
+import { Model, DataTypes, Sequelize } from "sequelize";
+import { DB_SCHEMA, Base } from "../settings/database";
 import { User } from "./user";
 
-export class ChatRoom extends Base { }
-ChatRoom.init(
-    {},
-    {
-        sequelize: Base.sequelize,
-        modelName: 'ChatRoom',
-        tableName: 'chat_room'
-    }
-)
+export class ChatRoom extends Base {}
+export function initChatRoomModel(sequelize: Sequelize=Base.sequelize) {
+    ChatRoom.init(
+        {},
+        {
+            sequelize: sequelize,
+            modelName: 'ChatRoom',
+            tableName: 'chat_room'
+        }
+    );
+    // ChatRoom.belongsToMany(User, { through: {model:'ChatRoomUser',unique:true} });
+}
 
-ChatRoom.belongsToMany(User, { through: {model:'ChatRoomUser',unique:true} });
