@@ -7,27 +7,43 @@ export class User extends Base { }
 export function initUserModel(sequelize: Sequelize=Base.sequelize) {
     User.init(
         {
+            userKey: {
+                type: DataTypes.STRING,
+                unique: true,
+                allowNull: false,
+            },
             displayName: {
                 type: DataTypes.STRING,
                 unique: true,
-                allowNull: false
+                allowNull: false,
             },
             lastLoginAt: {
                 type: DataTypes.DATE,
-                allowNull: false
+                allowNull: false,
+            },
+            updatedAt: {
+                type: DataTypes.DATE,
+                allowNull: true,
+                defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
+                onUpdate:'CASCADE',
             }
         }, {
         sequelize: sequelize,
         modelName: 'User',
         tableName: 'user',
+        underscored: true,
         indexes: [
             {
-                fields: ['displayName'],
+                fields: ['display_name'],
                 name: 'ix_user_display_name',
             },
             {
-                fields: ['lastLoginAt'],
+                fields: ['last_login_at'],
                 name: 'ix_user_last_login_at',
+            },
+            {
+                fields: ['user_key'],
+                name: 'ix_user_user_key',
             },
         ],
     }
@@ -52,13 +68,14 @@ export function initChatRoomUserModel(sequelize: Sequelize=Base.sequelize) {
             },
         }, {
         sequelize: sequelize,
+        underscored: true,
         modelName: 'ChatRoomUser',
         tableName: 'chat_room_user',
         indexes: [
             {
                 unique: true,
-                fields: ['userId', 'chatRoomId'],
-                name: 'user_chat_room_user_id_chatroom_id_key',
+                fields: ['user_id', 'chat_room_id'],
+                name: 'user_chat_room_user_id_chat_room_id_key',
             },
         ],
         validate: {

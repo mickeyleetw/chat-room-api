@@ -80,40 +80,31 @@ Base.init({
     allowNull: false
   }
 },
-  {
+  { 
     sequelize: SequelizeConnection.getInstance(),
     schema: DB_SCHEMA,
     modelName: 'Base',
-    freezeTableName: true
+    freezeTableName: true,
   }
 )
 
 
 // Create AsyncTransaction class for transaction management
-export class AsyncTransaction {
-  private transaction: Transaction | null = null;
-  private sequelize: Sequelize = SequelizeConnection.getInstance();
+export class AsyncTransaction extends Transaction {
+  public sequelize: Sequelize = SequelizeConnection.getInstance();
 
-  async start(): Promise<void> {
-    this.transaction = await this.sequelize.transaction(
-      {
-        isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
-        autocommit: false,
-      }
-    );
+  constructor() {
+    super(SequelizeConnection.getInstance(), {
+      isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
+      autocommit: false,
+    });
   }
 
   async commit(): Promise<void> {
-    if (this.transaction) {
-      await this.transaction.commit();
-      this.transaction = null;
-    }
+    super.commit();
   }
 
   async rollback(): Promise<void> {
-    if (this.transaction) {
-      await this.transaction.rollback();
-      this.transaction = null;
-    }
+    super.rollback();
   }
 }

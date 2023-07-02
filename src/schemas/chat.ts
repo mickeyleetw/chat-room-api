@@ -27,13 +27,14 @@ export function initChatModel(sequelize: Sequelize = Base.sequelize) {
         sequelize: sequelize,
         modelName: 'Chat',
         tableName: 'chat',
+        underscored: true,
         indexes: [
             {
-                fields: ['userId'],
+                fields: ['user_id'],
                 name: 'ix_chat_user_id',
             },
             {
-                fields: ['chatRoomId'],
+                fields: ['chat_room_id'],
                 name: 'ix_chat_chat_room_id',
             },
         ],

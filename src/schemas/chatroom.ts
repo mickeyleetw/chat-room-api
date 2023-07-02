@@ -1,7 +1,6 @@
 
-import { Model, DataTypes, Sequelize } from "sequelize";
-import { DB_SCHEMA, Base } from "../settings/database";
-import { User } from "./user";
+import { Sequelize } from "sequelize";
+import { Base } from "../settings/database";
 
 export class ChatRoom extends Base {}
 export function initChatRoomModel(sequelize: Sequelize=Base.sequelize) {
@@ -9,6 +8,7 @@ export function initChatRoomModel(sequelize: Sequelize=Base.sequelize) {
         {},
         {
             sequelize: sequelize,
+            underscored: true,
             modelName: 'ChatRoom',
             tableName: 'chat_room'
         }
