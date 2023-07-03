@@ -71,7 +71,9 @@ export class SequelizeConnection {
 }
 
 // Create Base column in all tables 
-export class Base extends Model { }
+export class Base extends Model { 
+  public id!: number;
+}
 Base.init({
   id: {
     type: DataTypes.INTEGER,

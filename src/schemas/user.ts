@@ -3,7 +3,13 @@ import { DataTypes, Sequelize } from "sequelize";
 import { Base } from "../settings/database";
 import { ChatRoom } from "./chatroom";
 
-export class User extends Base { }
+export class User extends Base {
+    public userKey!: string;
+    public displayName!: string;
+    public lastLoginAt!: Date;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+}
 export function initUserModel(sequelize: Sequelize=Base.sequelize) {
     User.init(
         {
