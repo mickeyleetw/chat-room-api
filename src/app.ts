@@ -1,11 +1,12 @@
 import express from 'express';
+import { userRouter } from './apps';
+
+const API_PORT = process.env.API_PORT || 3000;
+
 const app = express();
-const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use(userRouter);
 
-app.listen(port, () => {
-  return console.log(`Express is listening at http://localhost:${port}`);
-});
+app.listen(API_PORT, () => console.log(`This server is running on port ${API_PORT}`));
+
+export default app;

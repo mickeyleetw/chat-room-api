@@ -1,6 +1,4 @@
-import { Model } from "sequelize";
-
-class BaseError extends Error{
+export class BaseError extends Error{
     public statusCode: number;
     public message: string;
     public dataObject: string;
