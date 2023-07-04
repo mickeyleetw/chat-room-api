@@ -4,7 +4,14 @@ import { Base } from "../settings/database";
 import { User } from "./user";
 import { ChatRoom } from "./chatroom";
 
-export class Chat extends Base { }
+export class Chat extends Base {
+    public id!: number;
+    public content!: string;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+    public userId!: number;
+    public chatRoomId!: number;
+}
 export function initChatModel(sequelize: Sequelize = Base.sequelize) {
     Chat.init(
         {

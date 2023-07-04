@@ -54,11 +54,16 @@ export function initUserModel(sequelize: Sequelize=Base.sequelize) {
         ],
     }
     )
-    // User.belongsToMany(ChatRoom, { through: { model: 'ChatRoomUser', unique: true } });
+    User.belongsToMany(ChatRoom, { through: ChatRoomUser, targetKey: 'id', as: 'chatRooms' });
 }
 
 // Create ChatRoomUser class for many to many relationship
-export class ChatRoomUser extends Base { }
+export class ChatRoomUser extends Base { 
+    public userId!: number;
+    public chatRoomId!: number;
+    public createdAt!: Date;
+    public updatedAt!: Date;
+}
 export function initChatRoomUserModel(sequelize: Sequelize=Base.sequelize) {
     ChatRoomUser.init(
         {

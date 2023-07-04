@@ -6,7 +6,7 @@ import { UserModels } from "../models";
 
 abstract class AbstractUserRepo {
 
-    abstract getUser(user_id: number): Promise<UserModels.RetrieveUserModel | Error>;
+    abstract getUser(userId: number): Promise<UserModels.RetrieveUserModel | Error>;
 
 }
 
@@ -23,9 +23,9 @@ export class UserRepo extends AbstractUserRepo {
             user.id, user.displayName, user.lastLoginAt);
     }
 
-    async getUser(user_id: number): Promise<UserModels.RetrieveUserModel | Error> {
+    async getUser(userId: number): Promise<UserModels.RetrieveUserModel | Error> {
 
-        const user =await User.findByPk(user_id);
+        const user =await User.findByPk(userId);
         if (!user) {
             throw new ResourceNotFoundError('User');
         }

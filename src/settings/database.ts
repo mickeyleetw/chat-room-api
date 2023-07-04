@@ -73,6 +73,8 @@ export class SequelizeConnection {
 // Create Base column in all tables 
 export class Base extends Model { 
   public id!: number;
+  public createdAt!: Date;
+  public updatedAt!: Date;
 }
 Base.init({
   id: {

@@ -1,0 +1,20 @@
+import { Router } from 'express';
+import { ChatRoomUseCase } from '../usecases';
+
+const userRouter = Router();
+
+userRouter.get('/:chatRoomId', getChatRoom);
+
+async function getChatRoom(req, res): Promise<void> {
+    try{
+        const {chatRoomId}=req.params;
+        const userChatRooms=await ChatRoomUseCase.getUserChatRooms(chatRoomId);
+        res.json(userChatRooms);
+        return;
+    }catch(error){
+        res.status(error.statusCode).json(error);
+    }
+}
+
+
+export default userRouter;
