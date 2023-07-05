@@ -11,3 +11,18 @@ export class RetrieveChatModel {
         this.id = id;
     }
 }
+
+
+export class CreateChatModel {
+    public message: string;
+    public receiverId: number;
+
+    constructor(message: string, receiverId: number) {
+        this.message = message;
+        this.receiverId = receiverId;
+    }
+
+    static fromRequest(req): CreateChatModel {
+        return new CreateChatModel(req.body.message, req.body.receiverId);
+    }
+}

@@ -9,7 +9,7 @@ async function getChatRoom(req, res): Promise<void> {
     try{
         const {chatRoomId}=req.params;
         const userChatRooms=await ChatRoomUseCase.getUserChatRooms(chatRoomId);
-        res.json(userChatRooms);
+        res.status(200).json(userChatRooms);
         return;
     }catch(error){
         res.status(error.statusCode).json(error);

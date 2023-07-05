@@ -1,2 +1,3 @@
 import { ChatRoomUseCase } from "./chatroom";
-export { ChatRoomUseCase };
+import { ChatUseCase } from "./chat";
+export { ChatRoomUseCase,ChatUseCase };
