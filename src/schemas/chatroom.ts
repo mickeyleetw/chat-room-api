@@ -11,7 +11,7 @@ export class ChatRoom extends Base {
     public users!: User[];
     public chats: Chat[];
 }
-export function initChatRoomModel(sequelize: Sequelize=Base.sequelize) {
+export async function initChatRoomModel(sequelize: Sequelize=Base.sequelize) {
     ChatRoom.init(
         {},
         {

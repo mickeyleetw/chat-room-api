@@ -1,41 +1,34 @@
 import * as path from 'path';
 
-import { DB_SCHEMA, SequelizeConnection,AsyncTransaction } from './settings/database';
+import { DB_SCHEMA, SequelizeConnection } from './settings/database';
 import { initUserModel, initChatModel, initChatRoomModel, initChatRoomUserModel } from './schemas';
-import { processCSV,importData } from './data_importer';
+import { processCSV, importData } from './data_importer';
+import { Sequelize } from 'sequelize';
 
 async function resetDB() {
-
+    console.log('Reset DB starting...');
     const sequelize = await SequelizeConnection.connect();
-    sequelize.dropSchema(DB_SCHEMA, { logging: false });
-    sequelize.createSchema(DB_SCHEMA, { logging: false });
+    await initChatRoomModel(sequelize);
+    await initUserModel(sequelize);
+    await initChatRoomUserModel(sequelize);
+    await initChatModel(sequelize);
     await sequelize.sync({ force: true, schema: DB_SCHEMA });
-    initChatRoomModel(sequelize);
-    initUserModel(sequelize);
-    initChatRoomUserModel(sequelize);
-    initChatModel(sequelize);
-    await sequelize.sync({ force: true, schema: DB_SCHEMA });
-
-    await import_data();
-    console.log('reset DB done');
+    console.log('Create DB done');
+    console.log('Importing CSV...');
+    try {
+        await importCSV(sequelize);
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+    await sequelize.close();
+    console.log('Importing CSV done');
 }
 
-async function import_data():Promise<void>{
+async function importCSV(sequelize: Sequelize): Promise<void> {
     const appPath = `${path.resolve(__dirname, '..')}/src`;
-    console.log(appPath);
-    const tableSets=processCSV(appPath);
-    const transaction=new AsyncTransaction();
-    importData(transaction,tableSets);
-    await transaction.sequelize.sync();
-    await transaction.commit();
-
-
+    const tableSets = processCSV(appPath);
+    await importData(sequelize, tableSets);
 }
 
-// program.command('resetDB').action(async () => {await resetDB();});
-// program.parse(process.argv);
-resetDB();
-
-
-
-// Promise.all([resetDB()]);
+resetDB()

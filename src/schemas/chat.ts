@@ -12,7 +12,7 @@ export class Chat extends Base {
     public userId!: number;
     public chatRoomId!: number;
 }
-export function initChatModel(sequelize: Sequelize = Base.sequelize) {
+export async function initChatModel(sequelize: Sequelize = Base.sequelize) {
     Chat.init(
         {
             content: {

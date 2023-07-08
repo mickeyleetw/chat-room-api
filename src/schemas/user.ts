@@ -10,7 +10,7 @@ export class User extends Base {
     public createdAt!: Date;
     public updatedAt!: Date;
 }
-export function initUserModel(sequelize: Sequelize=Base.sequelize) {
+export async function initUserModel(sequelize: Sequelize=Base.sequelize) {
     User.init(
         {
             userKey: {
@@ -64,7 +64,7 @@ export class ChatRoomUser extends Base {
     public createdAt!: Date;
     public updatedAt!: Date;
 }
-export function initChatRoomUserModel(sequelize: Sequelize=Base.sequelize) {
+export async function initChatRoomUserModel(sequelize: Sequelize=Base.sequelize) {
     ChatRoomUser.init(
         {
             userId: {

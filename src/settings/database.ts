@@ -103,12 +103,4 @@ export class AsyncTransaction extends Transaction {
       autocommit: false,
     });
   }
-
-  async commit(): Promise<void> {
-    super.commit();
-  }
-
-  async rollback(): Promise<void> {
-    super.rollback();
-  }
 }
