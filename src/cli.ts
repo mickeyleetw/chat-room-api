@@ -8,10 +8,7 @@ import { Sequelize } from 'sequelize';
 async function resetDB() {
     console.log('Reset DB starting...');
     const sequelize = await SequelizeConnection.connect();
-    await initChatRoomModel(sequelize);
-    await initUserModel(sequelize);
-    await initChatRoomUserModel(sequelize);
-    await initChatModel(sequelize);
+    Promise.all([await initChatRoomModel(sequelize), await initUserModel(sequelize), await initChatRoomUserModel(sequelize), await initChatModel(sequelize)]);
     await sequelize.sync({ force: true, schema: DB_SCHEMA });
     console.log('Create DB done');
     console.log('Importing CSV...');

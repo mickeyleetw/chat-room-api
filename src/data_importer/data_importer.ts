@@ -58,12 +58,13 @@ export async function importData(sequelize: Sequelize, tableSets: object[]) {
             }
             const rawSQL = `INSERT INTO ${DB_SCHEMA}.${tableName}({cols}) VALUES({vals});`;
             const cols = tableCols.join(',');
+            let sqls = '';
             for (const dataRow of rawData) {
                 const dataImport = `'${dataRow.join('\', \'')}'`;
                 const sql = rawSQL.replace('{cols}', cols).replace('{vals}', dataImport);
-                await sequelize.query(sql, { transaction: transaction, raw: true, type: 'INSERT', plain: false }
-                );
+                sqls += `${sql}`;
             }
+            await sequelize.query(sqls, { transaction: transaction, raw: true, type: 'INSERT', plain: false });
         }
         await transaction.commit();
     } catch (err) {
