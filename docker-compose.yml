@@ -8,3 +8,14 @@ services:
       - POSTGRES_DB=elk
     ports:
       - 5432:5432
+  chat-room-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: chatroom-api
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_HOST=postgresql
+    expose:
+      - 3000

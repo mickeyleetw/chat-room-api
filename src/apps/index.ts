@@ -1,2 +1,3 @@
 import userRouter from './user';
-export {userRouter};
+import chatRoomRouter from './chatroom';
+export {userRouter,chatRoomRouter};

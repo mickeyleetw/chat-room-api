@@ -9,9 +9,22 @@
             "request": "launch",
             "name": "Reset DB",
             "runtimeVersion": "16",
-            "runtimeExecutable":"npm",
-            "runtimeArgs":["run", "resetDB"],
-            "program": "${workspaceFolder}/cli.ts"
-          }
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "resetDB"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "[Local API]",
+            "runtimeVersion": "16",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "start"
+            ]
+        }
     ]
 }

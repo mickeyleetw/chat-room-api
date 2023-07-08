@@ -4,7 +4,8 @@
   "description": "elkroom assignment",
   "main": "dist/app.js",
   "scripts": {
-    "resetDB": "tsc && node dist/cli.js",
+    "start": "tsc && node dist/app.js",
+    "resetDB": "tsc && node dist/resetDataBase.js",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [],

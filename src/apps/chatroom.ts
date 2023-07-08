@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { ChatRoomUseCase } from '../usecases';
 
-const userRouter = Router();
+const chatRoomRouter = Router();
 
-userRouter.get('/:chatRoomId', getChatRoom);
+chatRoomRouter.get('/:chatRoomId', getChatRoom);
 
 async function getChatRoom(req, res): Promise<void> {
     try{
@@ -17,4 +17,4 @@ async function getChatRoom(req, res): Promise<void> {
 }
 
 
-export default userRouter;
+export default chatRoomRouter;
