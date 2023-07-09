@@ -1,5 +1,5 @@
 import { User } from "../schemas";
-import { AsyncTransaction } from "../settings/database";
+import { AsyncTransaction } from "../settings/transaction";
 import { ResourceNotFoundError } from "../settings/errorhandle";
 
 import { UserModels } from "../models";

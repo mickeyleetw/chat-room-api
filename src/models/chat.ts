@@ -23,6 +23,6 @@ export class CreateChatModel {
     }
 
     static fromRequest(req): CreateChatModel {
-        return new CreateChatModel(req.body.message, req.body.receiverId);
+        return new CreateChatModel(req.message, req.receiverId);
     }
 }

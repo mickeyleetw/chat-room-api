@@ -2,7 +2,7 @@
 import { ChatRoomRepo } from './repositories';
 import { UserRepo } from './repositories/user';
 import { ChatRepo } from './repositories/chat';
-import { AsyncTransaction } from './settings/database';
+import { AsyncTransaction } from './settings/transaction';
 
 
 export class AsyncSequelizeUnitOfWork {
@@ -13,6 +13,7 @@ export class AsyncSequelizeUnitOfWork {
 
     constructor() {
         const transaction = new AsyncTransaction();
+        Promise.resolve(transaction.initDB());
         this.unitTransaction = transaction;
         this.chatRoomRepo = new ChatRoomRepo(transaction);
         this.userRepo = new UserRepo(transaction);

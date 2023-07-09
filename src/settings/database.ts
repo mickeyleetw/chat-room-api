@@ -7,7 +7,7 @@ export const DB_USERNAME = process.env.DB_PASSWORD || "elk";
 export const DB_PASSWORD = process.env.DB_PASSWORD || "password";
 export const DB_NAME = process.env.DB_NAME || "elk";
 export const DB_SCHEMA = process.env.DB_SCHEMA || "elk";
-export const DB_LOGGING = Boolean(process.env.DB_LOGGING) || false;
+export const DB_LOGGING = Boolean(process.env.DB_LOGGING) || true;
 export const DB_MAX_POOL_SIZE = Number(process.env.DB_MAX_POOL_SIZE) || 30;
 export const DB_POOL_ACQUIRE_TIMEOUT = Number(process.env.DB_POOL_ACQUIRE_TIMEOUT) || 60000;
 export const DB_POOL_IDLE_CONNECTION_TIME = Number(process.env.DB_POOL_IDLE_CONNECTION_TIME) || 30000;
@@ -91,16 +91,3 @@ Base.init({
     freezeTableName: true,
   }
 )
-
-
-// Create AsyncTransaction class for transaction management
-export class AsyncTransaction extends Transaction {
-  public sequelize: Sequelize = SequelizeConnection.getInstance();
-
-  constructor() {
-    super(SequelizeConnection.getInstance(), {
-      isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ,
-      autocommit: false,
-    });
-  }
-}

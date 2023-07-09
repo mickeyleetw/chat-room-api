@@ -1,6 +1,6 @@
 import { Op, Sequelize } from 'sequelize';
 
-import { AsyncTransaction } from "../settings/database";
+import { AsyncTransaction } from "../settings/transaction";
 import { ChatRoomModels, ChatModels } from "../models";
 import { ChatRoom, ChatRoomUser, User, Chat } from "../schemas";
 import { ResourceNotFoundError } from "../settings/errorhandle";

@@ -1,4 +1,4 @@
-import { AsyncTransaction } from "../settings/database";
+import { AsyncTransaction } from "../settings/transaction";
 import { Chat } from "../schemas";
 
 
